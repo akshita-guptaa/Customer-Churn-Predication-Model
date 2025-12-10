@@ -360,6 +360,38 @@ threshold = st.sidebar.slider(
     value=0.70,
     step=0.01,
 )
+# 📄 Sample CSV download
+sample_data = {
+    "customerID": ["0001-A", "0002-B", "0003-C"],
+    "gender": ["Female", "Male", "Female"],
+    "SeniorCitizen": [0, 1, 0],
+    "Partner": ["Yes", "No", "No"],
+    "Dependents": ["No", "No", "Yes"],
+    "tenure": [12, 3, 24],
+    "PhoneService": ["Yes", "No", "Yes"],
+    "MultipleLines": ["No", "No phone service", "Yes"],
+    "InternetService": ["Fiber optic", "DSL", "Fiber optic"],
+    "OnlineSecurity": ["No", "Yes", "No"],
+    "OnlineBackup": ["Yes", "No", "Yes"],
+    "DeviceProtection": ["No", "Yes", "No"],
+    "TechSupport": ["Yes", "No", "No"],
+    "StreamingTV": ["No", "No", "Yes"],
+    "StreamingMovies": ["Yes", "No", "Yes"],
+    "Contract": ["Month-to-month", "Two year", "One year"],
+    "PaperlessBilling": ["Yes", "No", "Yes"],
+    "PaymentMethod": ["Electronic check", "Credit card (automatic)", "Mailed check"],
+    "MonthlyCharges": [70.9, 20.5, 85.3],
+    "TotalCharges": [850.4, 61.5, 2000.0],
+}
+sample_df = pd.DataFrame(sample_data)
+
+st.sidebar.download_button(
+    label="📄 Download Sample Telco CSV",
+    data=sample_df.to_csv(index=False).encode("utf-8"),
+    file_name="sample_telco_customers.csv",
+    mime="text/csv",
+    help="Download a sample file and upload it below to see how the model works."
+)
 
 uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
 
