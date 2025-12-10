@@ -119,7 +119,8 @@ python src/train_model.py
 ```bash
 streamlit run dashboard/streamlit_app.py
 ```
-## 📸 Dashboard Preview
+---
+# 📸 Dashboard Preview
 
 ### 🏠 Main Dashboard
 ![Main Dashboard](images/dashboard_home.png)
@@ -144,7 +145,7 @@ Automatically identifies customers with churn probability ≥ selected threshold
 ![High Risk Customers](images/high_risk.png)
 
 ---
-## 🏢 Business Use Case & Impact
+# 🏢 Business Use Case & Impact
 
 This churn prediction model can support **telecom customer retention teams** by:
 
@@ -159,7 +160,7 @@ This churn prediction model can support **telecom customer retention teams** by:
 By predicting churn before it happens, the model can potentially **save significant revenue**, reduce customer turnover, and help the telecom business improve long-term loyalty.
 
 ---
-## 📊 Model Evaluation Results
+# 📊 Model Evaluation Results
 
 The RandomForest-based churn model is evaluated on a held-out test split of the Telco Customer Churn dataset.
 
@@ -194,7 +195,7 @@ The RandomForest-based churn model is evaluated on a held-out test split of the 
 
 ---
 
-## 🚀 Future Improvements
+#🚀 Future Improvements
 
 To further enhance the model, the following ideas can be implemented:
 
@@ -221,4 +222,5 @@ To further enhance the model, the following ideas can be implemented:
 - Add cohort filtering and timeline analysis  
 
 ---
+
 
