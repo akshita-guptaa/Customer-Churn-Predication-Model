@@ -9,21 +9,13 @@ import plotly.graph_objects as go
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import Pipeline
 
-try:
-    from src.preprocess import (
-        load_telco_data,
-        prepare_features_and_target,
-        split_feature_types,
-        build_preprocessor,
-    )
-except ImportError:
-    # fallback for local runs if src is not a package
-    from preprocess import (
-        load_telco_data,
-        prepare_features_and_target,
-        split_feature_types,
-        build_preprocessor,
-    )
+from src.preprocess import (
+    load_telco_data,
+    prepare_features_and_target,
+    split_feature_types,
+    build_preprocessor,
+)
+
 DATA_PATH = os.path.join("data", "WA_Fn-UseC_-Telco-Customer-Churn.csv")
 MODEL_PATH = os.path.join("models", "telco_churn_model.pkl")
 
