@@ -6,7 +6,25 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.pipeline import Pipeline
 
+try:
+    from src.preprocess import (
+        load_telco_data,
+        prepare_features_and_target,
+        split_feature_types,
+        build_preprocessor,
+    )
+except ImportError:
+    # fallback for local runs if src is not a package
+    from preprocess import (
+        load_telco_data,
+        prepare_features_and_target,
+        split_feature_types,
+        build_preprocessor,
+    )
+DATA_PATH = os.path.join("data", "WA_Fn-UseC_-Telco-Customer-Churn.csv")
 MODEL_PATH = os.path.join("models", "telco_churn_model.pkl")
 
 
@@ -14,12 +32,52 @@ MODEL_PATH = os.path.join("models", "telco_churn_model.pkl")
 
 @st.cache_resource
 def load_model():
-    if not os.path.exists(MODEL_PATH):
-        raise FileNotFoundError(
-            f"Model file not found at {MODEL_PATH}. "
-            "Train the model first using src/train_model.py."
-        )
-    return joblib.load(MODEL_PATH)
+    """
+    Load or build the sklearn Pipeline model.
+
+    On Streamlit Cloud, we avoid loading a pickled model (version issues)
+    and instead train the model on the fly from the Telco dataset.
+    """
+    # Try to load existing model (works locally if compatible)
+    if os.path.exists(MODEL_PATH):
+        try:
+            return joblib.load(MODEL_PATH)
+        except Exception as e:
+            # If unpickling fails (e.g., on Streamlit Cloud), fall back to retrain
+            print(f"[WARN] Failed to load pickled model: {e}. Retraining instead.")
+
+    # ---- Retrain model from raw data ----
+    print(f"[INFO] Training model from data at: {DATA_PATH}")
+    df = load_telco_data(DATA_PATH)
+    X, y = prepare_features_and_target(df)
+
+    cat_features, num_features = split_feature_types(X)
+    preprocessor = build_preprocessor(cat_features, num_features)
+
+    model = RandomForestClassifier(
+        n_estimators=300,
+        max_depth=None,
+        random_state=42,
+        n_jobs=-1,
+    )
+
+    pipeline = Pipeline(
+        steps=[
+            ("preprocessor", preprocessor),
+            ("model", model),
+        ]
+    )
+
+    pipeline.fit(X, y)
+
+    # Optional: try to save for local reuse (will work locally, may be read-only on cloud)
+    try:
+        os.makedirs("models", exist_ok=True)
+        joblib.dump(pipeline, MODEL_PATH)
+    except Exception as e:
+        print(f"[WARN] Could not save model: {e}")
+
+    return pipeline
 
 
 def ensure_minimal_columns(df: pd.DataFrame):
