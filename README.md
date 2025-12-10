@@ -119,3 +119,27 @@ python src/train_model.py
 ```bash
 streamlit run dashboard/streamlit_app.py
 ```
+## 📸 Dashboard Preview
+
+### 🏠 Main Dashboard
+![Main Dashboard](images/dashboard_home.png)
+
+### 📊 Radial Metrics 
+![Radial + Donut](images/radial_chart.png)
+
+### 🔗 Contract → Churn Sankey Flow
+![Sankey Flow](images/Sankey_flow.png)
+
+### 🔥CLTV
+![Heatmap + CLTV](images/CLTV.png)
+
+### 📈 Cohort Churn Line Chart
+![Cohort Line Chart](images/cohort_line_chart.png)
+
+### ⭐ Feature Importance
+![Feature Importance](images/important_features.png)
+
+### 🚨 High-Risk Customer Detection
+Automatically identifies customers with churn probability ≥ selected threshold.
+![High Risk Customers](images/high_risk.png)
+
