@@ -195,7 +195,7 @@ The RandomForest-based churn model is evaluated on a held-out test split of the 
 
 ---
 
-#🚀 Future Improvements
+# 🚀 Future Improvements
 
 To further enhance the model, the following ideas can be implemented:
 
@@ -222,5 +222,6 @@ To further enhance the model, the following ideas can be implemented:
 - Add cohort filtering and timeline analysis  
 
 ---
+
 
 
