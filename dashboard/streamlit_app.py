@@ -1,23 +1,32 @@
 
 import os
+import sys
+
 import joblib
 import numpy as np
 import pandas as pd
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
+
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import Pipeline
 
-from src.preprocess import (
+# ----- Make sure we can import from the src/ folder -----
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))  # project root
+SRC_DIR = os.path.join(BASE_DIR, "src")
+if SRC_DIR not in sys.path:
+    sys.path.append(SRC_DIR)
+
+from preprocess import (
     load_telco_data,
     prepare_features_and_target,
     split_feature_types,
     build_preprocessor,
 )
 
-DATA_PATH = os.path.join("data", "WA_Fn-UseC_-Telco-Customer-Churn.csv")
 MODEL_PATH = os.path.join("models", "telco_churn_model.pkl")
+DATA_PATH = os.path.join("data", "WA_Fn-UseC_-Telco-Customer-Churn.csv")
 
 
 # Utilities 
