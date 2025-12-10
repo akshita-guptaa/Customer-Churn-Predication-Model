@@ -32,21 +32,15 @@ DATA_PATH = os.path.join("data", "WA_Fn-UseC_-Telco-Customer-Churn.csv")
 
 @st.cache_resource
 def load_model():
-    """
-    Load or build the sklearn Pipeline model.
-
-    On Streamlit Cloud, we avoid loading a pickled model (version issues)
-    and instead train the model on the fly from the Telco dataset.
-    """
-    # Try to load existing model (works locally if compatible)
+    
     if os.path.exists(MODEL_PATH):
         try:
             return joblib.load(MODEL_PATH)
         except Exception as e:
-            # If unpickling fails (e.g., on Streamlit Cloud), fall back to retrain
+            
             print(f"[WARN] Failed to load pickled model: {e}. Retraining instead.")
 
-    # ---- Retrain model from raw data ----
+    # Retrain model from raw data 
     print(f"[INFO] Training model from data at: {DATA_PATH}")
     df = load_telco_data(DATA_PATH)
     X, y = prepare_features_and_target(df)
