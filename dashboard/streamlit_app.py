@@ -28,67 +28,6 @@ from preprocess import (
 MODEL_PATH = os.path.join("models", "telco_churn_model.pkl")
 DATA_PATH = os.path.join("data", "WA_Fn-UseC_-Telco-Customer-Churn.csv")
 
-def style_app():
-    """Modern, clean UI styling."""
-    st.markdown(
-        """
-        <style>
-        /* Overall background */
-        .stApp {
-            background: linear-gradient(135deg, #e0f7fa 0%, #f5f3ff 50%, #fff1f5 100%);
-        }
-
-        /* Main content container */
-        .block-container {
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Card-like sections (including tabs) */
-        .block-container > div {
-            background: rgba(255, 255, 255, 0.82);
-            backdrop-filter: blur(16px);
-            border-radius: 18px;
-            padding: 1.5rem 1.5rem 2rem 1.5rem;
-            box-shadow: 0 18px 35px rgba(15, 23, 42, 0.15);
-        }
-
-        /* Sidebar tweaks */
-        section[data-testid="stSidebar"] {
-            background-color: #f8fafc;
-        }
-
-        section[data-testid="stSidebar"] .block-container {
-            background: transparent;
-            box-shadow: none;
-        }
-
-        /* Metrics as cards */
-        div[data-testid="metric-container"] {
-            background: #f9fafb;
-            border-radius: 14px;
-            padding: 0.75rem 1rem;
-            box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
-            border: 1px solid #e5e7eb;
-        }
-
-        /* Dataframes */
-        .dataframe {
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        /* Hide Streamlit footer & menu for a cleaner look */
-        #MainMenu {visibility: hidden;}
-        footer {visibility: hidden;}
-        header {visibility: hidden;}
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-
 # Utilities 
 
 @st.cache_resource
