@@ -71,37 +71,7 @@ Includes powerful visualizations:
 - Light training-on-start fallback for compatibility
 
 ---
----
 
-## 📊 Model Evaluation Results
-
-The RandomForest-based churn model is evaluated on a held-out test split of the Telco Customer Churn dataset.
-
-### Classification Metrics
-
-| Metric        | Value   |
-|--------------|---------|
-| Accuracy     | 78.35 % |
-| Precision    | 61.94 % |
-| Recall       | 47.77 % |
-| F1-score     | 53.91 % |
-| ROC–AUC      | 82.00 % |
-
-> These values are computed in `src/train_model.py` using `scikit-learn` metrics on the test set.  
-> If you retrain the model with different parameters or a different random seed, the numbers may change slightly.
-
-### Confusion Matrix
-
-The confusion matrix (churn = positive class) is also logged/visualized in `train_model.py`:
-
-- **True Positives (TP):** customers correctly predicted as churners  
-- **False Positives (FP):** customers incorrectly predicted as churners  
-- **True Negatives (TN):** customers correctly predicted as non-churners  
-- **False Negatives (FN):** customers incorrectly predicted as non-churners  
-
-This helps understand the trade-off between catching more churners and avoiding unnecessary false alarms.
-
----
 # 📂 Project Structure
 ```
 Customer-Churn-Predication-Model/
@@ -173,4 +143,82 @@ streamlit run dashboard/streamlit_app.py
 Automatically identifies customers with churn probability ≥ selected threshold.
 ![High Risk Customers](images/high_risk.png)
 
+---
+## 🏢 Business Use Case & Impact
+
+This churn prediction model can support **telecom customer retention teams** by:
+
+- Identifying customers with **high churn probability**
+- Prioritizing outreach based on **CLTV (Customer Lifetime Value) × Churn Risk**
+- Understanding **drivers of churn** through the dashboard visuals and patterns
+- Designing targeted retention strategies:
+  - Discounts or offers for long-tenure, high-risk users  
+  - Personalized communication for specific customer segments  
+  - Early detection of users at risk based on contract type, internet service, and billing method  
+
+By predicting churn before it happens, the model can potentially **save significant revenue**, reduce customer turnover, and help the telecom business improve long-term loyalty.
+
+---
+## 📊 Model Evaluation Results
+
+The RandomForest-based churn model is evaluated on a held-out test split of the Telco Customer Churn dataset.
+
+### Classification Metrics
+
+| Metric        | Value   |
+|--------------|---------|
+| Accuracy     | 78.35 % |
+| Precision    | 61.94 % |
+| Recall       | 47.77 % |
+| F1-score     | 53.91 % |
+| ROC–AUC      | 82.00 % |
+
+> These values are computed in `src/train_model.py` using `scikit-learn` metrics on the test set.  
+> If you retrain the model with different parameters or a different random seed, the numbers may change slightly.
+
+### **Confusion Matrix**
+
+|               | Predicted No | Predicted Yes |
+|---------------|--------------|----------------|
+| **Actual No** | 1157         | 137            |
+| **Actual Yes**| 244          | 223            |
+
+> The confusion matrix (churn = positive class) is also logged/visualized in `train_model.py`.
+
+**Interpretation:**
+
+- The model performs **strongly in detecting non-churners** (very high TN).  
+- It identifies churners reasonably well, but still misses some (FN).  
+- Higher precision than recall → the model avoids false churn alarms.  
+- An ROC–AUC of **0.82** indicates **good separability** between churn and non-churn customers.
+
+---
+
+## 🚀 Future Improvements
+
+To further enhance the model, the following ideas can be implemented:
+
+### 🔧 **Model Enhancements**
+- Hyperparameter tuning (GridSearchCV / RandomizedSearchCV)
+- Compare multiple models:
+  - Logistic Regression  
+  - XGBoost  
+  - LightGBM  
+  - CatBoost  
+- Cost-sensitive learning for imbalanced churn cases
+
+### 📈 **Feature Engineering**
+- Add CLTV as an input feature  
+- Create interaction features (e.g., MonthlyCharges × Contract Type)
+
+### 🧪 **Evaluation Improvements**
+- Use precision-recall curves for deeper imbalance insights  
+- Add profit-weighted evaluation metrics  
+
+### 🖥 **Dashboard Enhancements**
+- Add customer-level SHAP explanations  
+- Add retention strategy recommendations based on model output  
+- Add cohort filtering and timeline analysis  
+
+---
 
