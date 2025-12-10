@@ -151,7 +151,7 @@ def hero_radial_chart(df_pred: pd.DataFrame):
         )
     )
     fig.update_layout(
-        template="plotly_white",
+        template="plotly_dark",
         polar=dict(radialaxis=dict(visible=True, range=[0, 100])),
         showlegend=False,
         margin=dict(l=40, r=40, t=40, b=40),
