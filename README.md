@@ -71,7 +71,37 @@ Includes powerful visualizations:
 - Light training-on-start fallback for compatibility
 
 ---
+---
 
+## 📊 Model Evaluation Results
+
+The RandomForest-based churn model is evaluated on a held-out test split of the Telco Customer Churn dataset.
+
+### Classification Metrics
+
+| Metric        | Value   |
+|--------------|---------|
+| Accuracy     | 78.35 % |
+| Precision    | 61.94 % |
+| Recall       | 47.77 % |
+| F1-score     | 53.91 % |
+| ROC–AUC      | 82.00 % |
+
+> These values are computed in `src/train_model.py` using `scikit-learn` metrics on the test set.  
+> If you retrain the model with different parameters or a different random seed, the numbers may change slightly.
+
+### Confusion Matrix
+
+The confusion matrix (churn = positive class) is also logged/visualized in `train_model.py`:
+
+- **True Positives (TP):** customers correctly predicted as churners  
+- **False Positives (FP):** customers incorrectly predicted as churners  
+- **True Negatives (TN):** customers correctly predicted as non-churners  
+- **False Negatives (FN):** customers incorrectly predicted as non-churners  
+
+This helps understand the trade-off between catching more churners and avoiding unnecessary false alarms.
+
+---
 # 📂 Project Structure
 ```
 Customer-Churn-Predication-Model/
@@ -142,4 +172,5 @@ streamlit run dashboard/streamlit_app.py
 ### 🚨 High-Risk Customer Detection
 Automatically identifies customers with churn probability ≥ selected threshold.
 ![High Risk Customers](images/high_risk.png)
+
 
