@@ -336,25 +336,6 @@ def cohort_churn_line(df_pred: pd.DataFrame):
     fig.update_layout(template="plotly_dark", margin=dict(l=40, r=40, t=40, b=40))
     st.plotly_chart(fig, use_container_width=True)
 
-st.markdown(
-    """
-    <style>
-        .main {
-            background: linear-gradient(135deg, #e0f7fa 0%, #fff1f5 100%);
-        }
-        .block-container {
-            backdrop-filter: blur(12px);
-            background: rgba(255, 255, 255, 0.55);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-top: 2rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 # Streamlit layout 
 
 st.set_page_config(
